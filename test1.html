@@ -1,0 +1,36 @@
+<head>
+  <title>test1</title>
+</head>
+
+<body>
+  {{> statusBar}}
+  <hr>
+  <div style="text-align:center;">{{> stuffList}}</div>
+</body>
+
+<template name="statusBar">
+  connected: {{connected}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; status: {{status}}
+</template>
+
+<template name="stuffList">
+  <H1>Hello Peeps</H1>
+  <table align="center">
+    {{#each stuffs}}
+      {{> stuff}}
+    {{/each}}
+  </table>
+  <div style="margin-top:15px;">
+    <input type="text" class="stuffKey" placeholder="key">
+    <input type="text" class="stuffValue" placeholder="value">
+    <button class="btn btn-primary addStuff">Add Stuff</button>
+  </div>
+
+</template>
+
+<template name="stuff">
+  <tr>
+    <td>{{_id}}:</td>
+    <td>{{key}}</td>
+    <td>{{value}}</td>
+  </tr>
+</template>
