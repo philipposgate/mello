@@ -3,10 +3,7 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-underscore
-backbone
 accounts
-accounts-ui
-accounts-google
-accounts-passwords
 bootstrap
+accounts-ui
+accounts-passwords
