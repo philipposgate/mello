@@ -19,7 +19,7 @@ Template.hello.greeting = function () {
 Template.hello.events = {
   'click input' : function () {
   		Meteor.call("foo", function(error, result) {
-  			console.log("\n");
+  			console.log("\n" + new Date());
   			console.log(error);
   			console.log(result);
   			console.log(Meteor.user());
