@@ -30,7 +30,7 @@
     <div class="container-fluid">
       <div class="row-fluid">
       		<div class="span12">
-		        {{> hello}}
+		        {{> main}}
 		      </div>
 	   </div>
 	</div>
@@ -41,7 +41,15 @@
   {{> loginButtons}}
 </template>
 
-<template name="hello">
+<template name="main">
+  {{#if loggedIn}}
+       {{> projects}}
+  {{else}}
+       {{> home}}
+  {{/if}}
+</template>
+
+<template name="home">
   <h1>Hello!</h1>
   <BR>
   {{greeting}}

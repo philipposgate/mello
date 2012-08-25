@@ -1,0 +1,23 @@
+<template name="projects">
+  <h3>Projects</h3>
+  <div id="projects">
+    {{#each projects}}
+      <div class="project {{selected}}">
+        {{#if editing}}
+          <div class="edit">
+            <input class="project-name-input" id="project-name-input" type="text" value="{{name}}" />
+          </div>
+        {{else}}
+          <div class="display">
+            <a class="project-name {{name_class}}" href="/{{_id}}">
+              {{name}}
+            </a>
+          </div>
+        {{/if}}
+      </div>
+    {{/each}}
+  </div>
+  <div id="createProject">
+    <input type="text" id="new-project" placeholder="New Project" />
+  </div>
+</template>
