@@ -15,7 +15,7 @@
           <a class="brand" href="#">Mello</a>
           <div class="nav-collapse collapse">
     		    <ul class="nav pull-right">
-              {{> accountWidget}}
+			  {{> loginButtons}}
     		    </ul>
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
@@ -37,12 +37,8 @@
 
 </body>
 
-<template name="accountWidget">
-  {{> loginButtons}}
-</template>
-
 <template name="main">
-  {{#if loggedIn}}
+  {{#if currentUser}}
        {{> projects}}
   {{else}}
        {{> home}}
