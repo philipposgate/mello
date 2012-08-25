@@ -1,3 +1,9 @@
+Meteor.accounts.config({
+  requireEmail: false,
+  requireUsername: true,
+  validateEmails: true
+});
+
 Meteor.startup(function(){
 	console.log("startup: " + new Date());
 	Backbone.history.start({pushState: true});
