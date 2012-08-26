@@ -5,17 +5,28 @@ Projects = new Meteor.Collection("projects");
 Session.set('project_id', null);
 
 // Subscribe to 'projects' collection on startup.
-// Select a project once data has arrived.
 Meteor.subscribe('projects', function () {
-//  if (!Session.get('project_id')) {
-//    var project = Projects.findOne({}, {sort: {name: 1}});
-//    if (project)
-//      ProjectRouter.setProject(project._id);
-//  }
+	// Select a project once data has arrived.
+	//  if (!Session.get('project_id')) {
+	//    var project = Projects.findOne({}, {sort: {name: 1}});
+	//    if (project)
+	//      ProjectRouter.setProject(project._id);
+	//  }
 });
 
 Template.projects.projects = function () {
   return Projects.find({}, {sort: {name: 1}});
+};
+
+Template.projects.events = {
+  'click .callFoo' : function() {
+	Meteor.call("foo", function(error, result) {
+		console.log("\n" + new Date());
+		console.log(error);
+		console.log(result);
+		console.log(Meteor.user());
+	 	});
+        }
 };
 
 var ProjectRouterProto = Backbone.Router.extend({

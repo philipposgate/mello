@@ -14,9 +14,9 @@
           </a>
           <a class="brand" href="#">Mello</a>
           <div class="nav-collapse collapse">
-    		    <ul class="nav pull-right">
-			  {{> loginButtons}}
-    		    </ul>
+	    <ul class="nav pull-right">
+		  {{> loginButtons}}
+	    </ul>
             <ul class="nav">
               <li class="active"><a href="#">Home</a></li>
               <li><a href="#about">About</a></li>
@@ -28,20 +28,24 @@
     </div>
 
     <div class="container-fluid">
-      <div class="row-fluid">
+	<div class="row-fluid">
       		<div class="span12">
 		        {{> main}}
-		      </div>
-	   </div>
+		</div>
 	</div>
+     </div>
 
 </body>
 
 <template name="main">
-  {{#if currentUser}}
-       {{> projects}}
+  {{#if connected}}
+	  {{#if currentUser}}
+	       {{> projects}}
+	  {{else}}
+	       {{> home}}
+	  {{/if}}
   {{else}}
-       {{> home}}
+	{{> notConnected}}
   {{/if}}
 </template>
 
@@ -49,6 +53,12 @@
   <h1>Hello!</h1>
   <BR>
   {{greeting}}
-  <input type="button" value="Click" class="btn btn-inverse" />
+  <input type="button" value="Call Foo" class="btn btn-inverse callFoo" />
+</template>
+
+<template name="notConnected">
+  {{#if waiting}}
+	  <div>Not Connected!</div>
+  {{/if}}
 </template>
 
