@@ -2,6 +2,28 @@
 Meteor.startup(function(){
 	console.log("startup: " + new Date());
 	Backbone.history.start({pushState: true});
+
+	var mainContent = Meteor.ui.render(function(){
+		var content;
+		if (isConnected())
+		{
+			if (Meteor.user())
+			{
+				content = Template.projects();
+			}
+			else
+			{
+				content = Template.home();
+			}
+		}
+		else
+		{
+				content = Template.notConnected();
+		}
+		return content;
+	});
+	$("div#mainContent").html(mainContent);
+
 });
 
 function onLogin()
@@ -14,7 +36,11 @@ function onLogout()
 	console.log("onLogout(): " + new Date());
 }
 
-Template.main.connected = function() {
+function isConnected() {
+	return Meteor.status().connected && Meteor.status().status != "waiting";
+};
+
+function isLoggedIn() {
 	return Meteor.status().connected && Meteor.status().status != "waiting";
 };
 

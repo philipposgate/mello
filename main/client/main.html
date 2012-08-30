@@ -28,26 +28,14 @@
     </div>
 
     <div class="container-fluid">
-	<div class="row-fluid">
-      		<div class="span12">
-		        {{> main}}
-		</div>
-	</div>
-     </div>
+	     <div class="row-fluid">
+          <div class="span12">
+            <div id="mainContent"></div>
+		      </div>
+	     </div>
+    </div>
 
 </body>
-
-<template name="main">
-  {{#if connected}}
-	  {{#if currentUser}}
-	       {{> projects}}
-	  {{else}}
-	       {{> home}}
-	  {{/if}}
-  {{else}}
-	{{> notConnected}}
-  {{/if}}
-</template>
 
 <template name="home">
   <h1>Hello!</h1>
