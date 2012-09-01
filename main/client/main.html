@@ -12,15 +12,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Mello</a>
+          <div class="brand">Mello</div>
           <div class="nav-collapse collapse">
 	    <ul class="nav pull-right">
 		  {{> loginButtons}}
 	    </ul>
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li class="active"><a href="/p/home">Home</a></li>
+              <li><a href="/p/about">About</a></li>
+              <li><a href="/p/contact">Contact</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -28,25 +28,41 @@
     </div>
 
     <div class="container-fluid">
-	     <div class="row-fluid">
-          <div class="span12">
-            <div id="mainContent"></div>
-		      </div>
-	     </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div id="mainContent"></div>
+            </div>
+        </div>
     </div>
 
 </body>
 
-<template name="home">
-  <h1>Hello!</h1>
-  <BR>
-  {{greeting}}
-  <input type="button" value="Call Foo" class="btn btn-inverse callFoo" />
+<template name="notLoggedIn">
+  Not Logged In
+</template>
+
+<template name="pageNotFound">
+  Page Not Found
 </template>
 
 <template name="notConnected">
   {{#if waiting}}
 	  <div>Not Connected!</div>
   {{/if}}
+</template>
+
+<template name="home">
+  <h1>Home!</h1>
+  <BR>
+  {{greeting}}
+  <input type="button" value="Call Foo" class="btn btn-inverse callFoo" />
+</template>
+
+<template name="about">
+  <h1>About!</h1>
+</template>
+
+<template name="contact">
+  <h1>Contact!</h1>
 </template>
 

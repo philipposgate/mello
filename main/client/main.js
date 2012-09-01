@@ -1,63 +1,76 @@
+var appRouter;
+
+$(document).ready(function(){
+    var AppRouter = Backbone.Router.extend({
+        routes: {
+            "p/:template": "page"    // /p/fooTemplate
+        },
+        page: function(template) {
+            Session.set("mainTemplate", template);
+        }
+    });
+
+    appRouter = new AppRouter;
+    
+	Backbone.history.start({pushState: true});
+	
+	if (!Session.get("mainTemplate"))
+	{
+    	appRouter.navigate("/p/home", {trigger: true});	    
+	}
+});
 
 Meteor.startup(function(){
-	console.log("startup: " + new Date());
-	Backbone.history.start({pushState: true});
+                
+	var mainContent = Meteor.ui.render(function() {
 
-	var mainContent = Meteor.ui.render(function(){
-		var content;
+        var t = Session.get("mainTemplate");
+
 		if (isConnected())
 		{
-			if (Meteor.user())
-			{
-				content = Template.projects();
-			}
-			else
-			{
-				content = Template.home();
-			}
+		    if (Template[t])
+		    {
+		        if (Template[t].loginRequired && !Meteor.user())
+		        {
+				    t = "notLoggedIn";
+				}		       
+		    }
+		    else
+		    {
+				t = "pageNotFound";
+		    }
 		}
 		else
 		{
-				content = Template.notConnected();
+		    t = "notConnected";
 		}
-		return content;
+
+   		return Template[t]();
 	});
+	
 	$("div#mainContent").html(mainContent);
 
 });
 
 function onLogin()
 {
-	console.log("onLogin(): " + new Date());
+	//console.log("onLogin(): " + new Date());
+	appRouter.navigate("/p/projects", {trigger: true});
 }
 
 function onLogout()
 {
-	console.log("onLogout(): " + new Date());
+	//console.log("onLogout(): " + new Date());
+	appRouter.navigate("/p/home", {trigger: true});
 }
 
 function isConnected() {
-	return Meteor.status().connected && Meteor.status().status != "waiting";
-};
-
-function isLoggedIn() {
-	return Meteor.status().connected && Meteor.status().status != "waiting";
+      	return Meteor.status().connected && Meteor.status().status === "connected";
 };
 
 Template.notConnected.waiting = function() {
 	return Meteor.status().status === "waiting";
 };
 
-Template.home.events = {
-  'click .callFoo' : function() {
-	Meteor.call("foo", function(error, result) {
-		console.log("\n" + new Date());
-		console.log(error);
-		console.log(result);
-		console.log(Meteor.user());
-	 	});
-        }
-
-};
 
 
