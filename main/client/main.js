@@ -6,6 +6,10 @@ $(document).ready(function(){
             "p/:template": "page"    // /p/fooTemplate
         },
         page: function(template) {
+            if (template == "home" && Meteor.user())
+            {
+                template = "projects";
+            }
             Session.set("mainTemplate", template);
         }
     });
@@ -14,10 +18,10 @@ $(document).ready(function(){
     
 	Backbone.history.start({pushState: true});
 	
-	if (!Session.get("mainTemplate"))
-	{
-    	appRouter.navigate("/p/home", {trigger: true});	    
-	}
+    if (!Session.get("mainTemplate"))
+    {
+	    appRouter.navigate("/p/home", {trigger: true});	    
+    }
 });
 
 Meteor.startup(function(){
