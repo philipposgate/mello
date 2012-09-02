@@ -39,6 +39,8 @@ $(document).ready(function() {
         appRouter.loadMainContent(home);
     }
     
+    // This chunk doesn't seem to work because loading the 
+    // 'mainContent' area seems to reload the whole page!
     $(".navLink", ".nav").click(function(){
         $(".navLink").removeClass("active");
         $(this).addClass("active");
@@ -50,6 +52,9 @@ Meteor.startup(function() {
     console.log("startup: " + new Date);
     
     // Set "mainContent"
+    // NOTE: this technique seems to reload the whole 
+    // page when the content changes here.  Need to 
+    // find a better way!
 	$("div#mainContent").html(getMainContent());
 
 });
