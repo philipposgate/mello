@@ -1,36 +1,65 @@
 var appRouter;
+var home = "home";
+var homeLoggedIn = "projects";
 
-$(document).ready(function(){
+$(document).ready(function() {
+
+    // Backbone Router Definition: AppRouter
     var AppRouter = Backbone.Router.extend({
         routes: {
-            "p/:template": "page"    // /p/fooTemplate
+            "p/:template": "mainContentRoute"    // eg: /p/myTemplate
         },
-        page: function(template) {
-            if (template == "home" && Meteor.user())
+        
+        mainContentRoute: function(template) {
+        
+            if (template == home && Meteor.user())
             {
-                template = "projects";
+                template = homeLoggedIn;
             }
-            Session.set("mainTemplate", template);
+            
+            // Change "mainContent"
+            Session.set("mainContent", template);
+        },
+        
+        loadMainContent: function(template) {
+	        this.navigate("/p/" + template, {trigger: true});
         }
+        
     });
 
+    // Instantiate AppRouter
     appRouter = new AppRouter;
     
+    // Startup Backbone History Engine
 	Backbone.history.start({pushState: true});
 	
-    if (!Session.get("mainTemplate"))
+	// Set Default Page
+    if (!Session.get("mainContent"))
     {
-	    appRouter.navigate("/p/home", {trigger: true});	    
+        appRouter.loadMainContent(home);
     }
+    
+    $(".navLink", ".nav").click(function(){
+        $(".navLink").removeClass("active");
+        $(this).addClass("active");
+    });
 });
 
-Meteor.startup(function(){
-                
-	var mainContent = Meteor.ui.render(function() {
+Meteor.startup(function() {
+               
+    console.log("startup: " + new Date);
+    
+    // Set "mainContent"
+	$("div#mainContent").html(getMainContent());
 
-        var t = Session.get("mainTemplate");
+});
 
-		if (isConnected())
+function getMainContent() {
+	return Meteor.ui.render(function() {
+
+        var t = Session.get("mainContent");
+
+		if (Meteor.status().connected && Meteor.status().status === "connected")
 		{
 		    if (Template[t])
 		    {
@@ -51,26 +80,17 @@ Meteor.startup(function(){
 
    		return Template[t]();
 	});
-	
-	$("div#mainContent").html(mainContent);
-
-});
+}
 
 function onLogin()
 {
-	//console.log("onLogin(): " + new Date());
-	appRouter.navigate("/p/projects", {trigger: true});
+    appRouter.loadMainContent(homeLoggedIn);
 }
 
 function onLogout()
 {
-	//console.log("onLogout(): " + new Date());
-	appRouter.navigate("/p/home", {trigger: true});
+    appRouter.loadMainContent(home);
 }
-
-function isConnected() {
-      	return Meteor.status().connected && Meteor.status().status === "connected";
-};
 
 Template.notConnected.waiting = function() {
 	return Meteor.status().status === "waiting";

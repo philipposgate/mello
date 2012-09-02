@@ -18,9 +18,9 @@
 		  {{> loginButtons}}
 	    </ul>
             <ul class="nav">
-              <li class="active"><a href="/p/home">Home</a></li>
-              <li><a href="/p/about">About</a></li>
-              <li><a href="/p/contact">Contact</a></li>
+              <li class="navLink"><a href="/p/home">Home</a></li>
+              <li class="navLink"><a href="/p/about">About</a></li>
+              <li class="navLink"><a href="/p/contact">Contact</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -53,9 +53,6 @@
 
 <template name="home">
   <h1>Home!</h1>
-  <BR>
-  {{greeting}}
-  <input type="button" value="Call Foo" class="btn btn-inverse callFoo" />
 </template>
 
 <template name="about">
