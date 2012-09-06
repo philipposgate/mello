@@ -60,7 +60,7 @@ Meteor.startup(function() {
 });
 
 function getMainContent() {
-	return Meteor.ui.render(function() {
+	return Meteor.render(function() {
 
         var t = Session.get("mainContent");
 

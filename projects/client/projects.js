@@ -28,7 +28,7 @@ Template.projects.events = {
 		console.log(result);
 		console.log(Meteor.user());
 	 	});
-        }
+    }
 };
 
 var ProjectRouterProto = Backbone.Router.extend({
