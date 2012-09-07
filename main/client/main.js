@@ -63,8 +63,9 @@ function getMainContent() {
 	return Meteor.render(function() {
 
         var t = Session.get("mainContent");
+        var s = Meteor.status();
 
-		if (Meteor.status().connected && Meteor.status().status === "connected")
+		if (s.connected && s.status === "connected")
 		{
 		    if (Template[t])
 		    {

@@ -68,6 +68,19 @@
       };
     },
 
+    'click #login-buttons-Twitter': function () {
+      try {
+        Meteor.loginWithTwitter();
+      } catch (e) {
+        if (e instanceof Meteor.accounts.ConfigError)
+          alert("Twitter API key not set. Configure app details with "
+                + "Meteor.accounts.twitter.config() and "
+                + "Meteor.accounts.twitter.setSecret()");
+        else
+          throw e;
+      };
+    },
+
     'click #login-buttons-logout': function() {
       Meteor.logout();
       resetSession();
@@ -142,6 +155,8 @@
           document.getElementById('login-username').value = usernameOrEmail;
         else
           document.getElementById('login-email').value = usernameOrEmail;
+
+      document.getElementById('login-password').value = password;
     },
     'click #forgot-password-link': function () {
       resetMessages();
@@ -429,7 +444,10 @@
     return Session.get(JUST_VALIDATED_USER_KEY);
   };
 
-  // XXX why is this in Meteor.startup?
+
+  // Needs to be in Meteor.startup because of a package loading order
+  // issue. We can't be sure that accounts-passwords is loaded earlier
+  // than accounts-ui so Meteor.validateEmail might not be defined.
   Meteor.startup(function () {
     if (Meteor.accounts._validateEmailToken) {
       Meteor.validateEmail(Meteor.accounts._validateEmailToken, function(error) {
@@ -544,6 +562,8 @@
       ret.push({name: 'Google'});
     if (Meteor.accounts.weibo)
       ret.push({name: 'Weibo'});
+    if (Meteor.accounts.twitter)
+      ret.push({name: 'Twitter'});
 
     // make sure to put accounts last, since this is the order in the
     // ui as well
