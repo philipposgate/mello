@@ -5,7 +5,7 @@ var homeLoggedIn = "projects";
 $(document).ready(function() {
 
     // Backbone Router Definition: AppRouter
-    var AppRouter = Backbone.Router.extend({
+   /* var AppRouter = Backbone.Router.extend({
         routes: {
             "p/:template": "mainContentRoute"    // eg: /p/myTemplate
         },
@@ -31,13 +31,13 @@ $(document).ready(function() {
     appRouter = new AppRouter;
     
     // Startup Backbone History Engine
-	Backbone.history.start({pushState: true});
+	Backbone.history.start({pushState: true});*/
 	
 	// Set Default Page
-    if (!Session.get("mainContent"))
+    /*if (!Session.get("mainContent"))
     {
         appRouter.loadMainContent(home);
-    }
+    }*/
     
     // This chunk doesn't seem to work because loading the 
     // 'mainContent' area seems to reload the whole page!
@@ -55,7 +55,7 @@ Meteor.startup(function() {
     // NOTE: this technique seems to reload the whole 
     // page when the content changes here.  Need to 
     // find a better way!
-	$("div#mainContent").html(getMainContent());
+	//$("div#mainContent").html(getMainContent());
 
 });
 
@@ -98,9 +98,9 @@ function onLogout()
     appRouter.loadMainContent(home);
 }
 
-Template.notConnected.waiting = function() {
+/*Template.notConnected.waiting = function() {
 	return Meteor.status().status === "waiting";
-};
+};*/
 
 
 
