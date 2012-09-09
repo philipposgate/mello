@@ -1,0 +1,75 @@
+<template name="navbar">
+
+    <!-- navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <div class="brand">Mello</div>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="navLink"><a href="/p/home">Home</a></li>
+              <li class="navLink"><a href="/p/about">About</a></li>
+              <li class="navLink"><a href="/p/contact">Contact</a></li>
+            </ul>
+            <div class="pull-right">
+                {{#if currentUser}}
+                    <ul class="nav">
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{currentUser.username}} <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="javascript:void(0)" class="logoutBtn">Log Out</a></li>
+                          <li class="divider"></li>
+                          <li><a href="javascript:void(0)" class="manageAcctBtn">Manage Account</a></li>
+                        </ul>
+                      </li>
+                    </ul>
+                {{else}}
+                    {{#if showLogin}}
+                        <form class="navbar-form">
+                            <input class="span2" type="text" id="loginUsername" placeholder="Username" style="vertical-align:top;">
+                            <input class="span2" type="password" id="loginPassword" placeholder="Password" style="vertical-align:top;">
+                            <button type="button" class="btn loginBtn">Sign in</button>
+                            <button type="button" class="btn cancelLoginBtn">Cancel</button>
+                        </form>
+                    {{else}}
+                        <ul class="nav">
+                          <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Not Logged In <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                              <li><a href="javascript:void(0)" class="showLoginBtn">Login</a></li>
+                              <li class="divider"></li>
+                              <li><a href="javascript:void(0)" data-toggle="modal" data-target="#createAcctModal">Create New Account</a></li>
+                              <li><a href="javascript:void(0)" class="forgotPwdBtn">Forgot Password</a></li>
+                            </ul>
+                          </li>
+                        </ul>
+                    {{/if}}
+                {{/if}}
+            </div>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+    <!-- /.navbar -->
+            
+    <!-- #createAcctModal -->
+    <div class="modal hide fade" id="createAcctModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Create New Account</h3>
+      </div>
+      <div class="modal-body">
+        <p>todo...</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-primary">Create Account</button>
+      </div>
+    </div>      
+
+</template>
