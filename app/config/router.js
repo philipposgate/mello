@@ -4,13 +4,13 @@ if(Meteor.is_client)
 		
 		var Router = Backbone.Router.extend({
 			routes: {
-				"*actions" : "defaultRoute"
+				"*actions" : "defaultRouting"
 			},
-			defaultRoute: function(actions){
-				if(!actions) {
-					$('body').html(Template.home());
+			defaultRouting: function(actions){
+				if(!actions || typeof Mello[actions] === "undefined") {
+					Mello.home.index();
 				} else {
-					$('body').html(Template[actions]());
+					Mello[actions].index();
 				}
 			}
 		});
