@@ -17,7 +17,6 @@ $(document).ready(function(){
 function getCollectionNames() {
 	Meteor.call('getCollectionNames', function(error, result) {
 		if (typeof error === "undefined") {
-			console.log(result);
 			Template.collections.list = result;
 			$('.collectionList').html(Template.collections());
 		}
@@ -26,9 +25,7 @@ function getCollectionNames() {
 
 function getCollectionInfo(collection) {
 	Meteor.call('getCollectionInfo', collection, function(error, result) {
-		if (typeof error === "undefined") {
-			console.log(result);
-			
+		if (typeof error === "undefined") {			
 			Template.documents.list = [];
 			_.each(result, function(value) {
 				Template.documents.list.push(JSON.stringify(value));

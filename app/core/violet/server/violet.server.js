@@ -1,22 +1,12 @@
-var require = __meteor_bootstrap__.require,
-	mongodb = require("mongodb"),
-	Fiber 	= require("fibers");
-
-var Mongo = Meteor._Mongo;
-Future.prototype.ret = Future.prototype.return;
-
-/*Users = new Meteor.Collection("Users");
-Users.insert({firstname:"Paul", lastname:"Smith"});*/
-
-db = new mongodb.Db('meteor', new mongodb.Server("127.0.0.1", 3002),
-		{auto_reconnect: false, poolSize:4}, {native_parser:false});
-
 Meteor.methods({
 	// retrieve collection names from the database
 	getCollectionNames: function() {
 		
 		var self = this;
 		var fiber = Fiber.current;
+		
+		db = new mongodb.Db('meteor', new mongodb.Server("127.0.0.1", 3002),
+				{auto_reconnect: false, poolSize:4}, {native_parser:false});
 			
 		db.open(function(err, db){
 				
