@@ -102,5 +102,13 @@ Template.notConnected.waiting = function() {
 	return Meteor.status().status === "waiting";
 };
 
+<!-- helper func -->
+function elementValueById(id) {
+    var element = document.getElementById(id);
+    if (!element)
+      return null;
+    else
+      return element.value;
+};
 
 
