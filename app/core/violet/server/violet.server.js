@@ -34,11 +34,31 @@ Meteor.methods({
 	},
 	
 	// retrieve collection info from the database
-	getCollectionInfo: function(collection) {
+	getCollectionInfo: function(c) {
 		
-		var collection = new Meteor.Collection(collection);
-		console.log(collection);
-		return collection.find().fetch();
+		var fiber = Fiber.current;
+		db = new mongodb.Db('meteor', new mongodb.Server("127.0.0.1", 3002),
+				{auto_reconnect: false, poolSize:4}, {native_parser:false});
+		
+		db.open(function(err, db){
+			
+			if(err) return fiber.throwInto(err);
+			
+			db.collection(c, {safe:true}, function(err, r){
+				if(err) return fiber.throwInto(err);
+				
+				r.find({}).toArray(function(err, docs) {
+					if(err) return fiber.throwInto(err);
+					fiber.run(docs);
+				})
+			});
+			
+		});
+		
+		var docs = Fiber.yield(), result = [];
+		
+		db.close();
+		return docs;
 		
 	}
 });
