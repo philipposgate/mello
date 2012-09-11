@@ -1,5 +1,6 @@
 body {
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	background-color:#cecece;
 	margin: 0;
 	padding: 0;
 }
@@ -9,24 +10,24 @@ body {
 	margin: 0px auto;
 }
 
-.collectionList {
-	height: 400px;
-	font-size: 13px;
-	line-height: 20px;
-	letter-spacing: 4px;
+.dash {
+	width:auto;
+	-webkit-box-shadow: 0px 0px 10px 0px #ccc;
+	-moz-box-shadow: 0px 0px 10px 0px #ccc;
+	box-shadow: 0px 0px 10px 0px #999;
+	border: 1px solid #ddd;
 	position:  relative;
 	margin: 15px 0;
 	padding: 39px 19px 14px;
 	*padding-top: 19px;
 	background-color: #fff;
-	border: 1px solid #ddd;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
+	height: 450px;
 }
 
-/* Echo out a label for the example */
-.collectionList:after {
+.dash:after {
 	content: "Collections";
 	position: absolute;
 	top: -1px;
@@ -42,8 +43,16 @@ body {
 	border-radius: 4px 0 4px 0;
 }
 
+.collectionList {
+	height: 400px;
+	font-size: 13px;
+	line-height: 20px;
+	letter-spacing: 4px;
+	border-right:1px solid #ddd;
+	
+}
+
 .documentList {
-	margin-top:20px;
 }
 
 .document {

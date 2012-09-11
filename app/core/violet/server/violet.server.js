@@ -55,7 +55,7 @@ Meteor.methods({
 			
 		});
 		
-		var docs = Fiber.yield(), result = [];
+		var docs = Fiber.yield();
 		
 		db.close();
 		return docs;
