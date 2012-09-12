@@ -7,7 +7,6 @@ if(Meteor.is_client)
 				"*actions" : "defaultRouting"
 			},
 			defaultRouting: function(actions){
-			console.log(actions);
 				if(!actions || typeof Mello[actions] === "undefined") {
 					Mello.home.index();
 				} else {
