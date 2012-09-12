@@ -1,20 +1,20 @@
 <template name="violet">
-<div class="container">
-	<div class="">
-		<ul class="breadcrumb">
-			<li><a href="#">Meteor</a></li>
-		</ul>
-	</div>
-	<div class="dash row-fluid">
-		<div class="span3">
-			<div class="collectionList">{{>collections}}</div>
-			<div class="">
-				<a href="" class="btn">Add New Collection</a>
-			</div>
-		</div>
-		<div class="documentList span9">Select a Collection to begin</div>
-	</div>
-</div>
+    <div class="container">
+	    <div class="">
+		    <ul class="breadcrumb">
+			    <li><a href="#">Meteor</a></li>
+		    </ul>
+	    </div>
+	    <div class="dash row-fluid">
+		    <div class="span3">
+			    <div class="collectionList">{{>collections}}</div>
+			    <div class="">
+				    <button class="btn newCollectionBtn">Add New Collection</button>
+			    </div>
+		    </div>
+		    <div class="documentList span9">Select a Collection to begin</div>
+	    </div>
+    </div>
 </template>
 
 <template name="collections">

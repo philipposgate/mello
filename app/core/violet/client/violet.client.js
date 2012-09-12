@@ -7,6 +7,12 @@ _.extend(Mello, {
 	}
 });
 
+Template.voilet.events({
+    "click .newCollectionBtn" : function() {
+	    alert(1234);
+    }
+});
+
 $(document).ready(function(){
 	$('.collection a').live('click', function(e){
 		e.preventDefault();
