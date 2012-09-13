@@ -14,7 +14,7 @@ Meteor.subscribe('projects', function () {
 	//  }
 });
 
-Template.projects.loginRequired = true;
+Template.projects.authRequired = true;
 
 Template.projects.projects = function () {
   return Projects.find({}, {sort: {name: 1}});

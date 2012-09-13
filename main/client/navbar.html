@@ -10,9 +10,9 @@
           <div class="brand">Mello</div>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="navLink"><a href="/p/home">Home</a></li>
-              <li class="navLink"><a href="/p/about">About</a></li>
-              <li class="navLink"><a href="/p/contact">Contact</a></li>
+              <li class="navLink"><a href="/home">Home</a></li>
+              <li class="navLink"><a href="/about">About</a></li>
+              <li class="navLink"><a href="/contact">Contact</a></li>
             </ul>
             <div class="pull-right">
                 {{#if currentUser}}
@@ -27,26 +27,17 @@
                       </li>
                     </ul>
                 {{else}}
-                    {{#if showLogin}}
-                        <form class="navbar-form">
-                            <input class="span2" type="text" id="loginUsername" placeholder="Username" style="vertical-align:top;">
-                            <input class="span2" type="password" id="loginPassword" placeholder="Password" style="vertical-align:top;">
-                            <button type="button" class="btn btn-inverse loginBtn">Sign in</button>
-                            <button type="button" class="btn btn-inverse cancelLoginBtn">Cancel</button>
-                        </form>
-                    {{else}}
-                        <ul class="nav">
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Not Logged In <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                              <li><a href="javascript:void(0)" class="showLoginBtn">Login</a></li>
-                              <li class="divider"></li>
-                              <li><a href="javascript:void(0)" id="newAcctBtn">Create New Account</a></li>
-                              <li><a href="javascript:void(0)" class="forgotPwdBtn">Forgot Password</a></li>
-                            </ul>
-                          </li>
+                    <ul class="nav">
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Not Logged In <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="javascript:void(0)" onclick="Template.loginModal.open()">Login</a></li>
+                          <li class="divider"></li>
+                          <li><a href="javascript:void(0)" onclick="Template.createAcctModal.open()">Create New Account</a></li>
+                          <li><a href="javascript:void(0)" class="forgotPwdBtn">Forgot Password</a></li>
                         </ul>
-                    {{/if}}
+                      </li>
+                    </ul>
                 {{/if}}
             </div>
           </div><!--/.nav-collapse -->
@@ -54,48 +45,6 @@
       </div>
     </div>
     
+    {{> loginModal}}
     {{> createAcctModal}}
-</template>
-
-<template name="createAcctModal">
-    <div class="modal hide fade" id="createAcctModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">Create New Account</h3>
-      </div>
-      <div class="modal-body">
-      
-        <p>Complete this form to create your new account.</p>
-
-        <form id="createAcctForm">
-            <table style="margin-left:20px;">
-                <col width="130">
-                <tr>
-                    <td>Username</td>
-                    <td><input type="text" id="createAcct-username"></td>
-                </tr>
-                <tr>
-                    <td>Password</td>
-                    <td><input type="password" id="createAcct-password"></td>
-                </tr>
-                <tr>
-                    <td>Confirm Password</td>
-                    <td><input type="password" id="createAcct-confirmPassword"></td>
-                </tr>
-            </table>
-        </form>
-
-        {{> createAcctMessages}}        
-      </div>
-      <div class="modal-footer">
-        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
-        <button class="btn btn-primary createAcctBtn">Create Account</button>
-      </div>
-    </div>      
-</template>
-
-<template name="createAcctMessages">
-    {{#if errorMessage}}
-        <div class="alert alert-error">{{errorMessage}}</div>
-    {{/if}}
 </template>

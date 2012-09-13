@@ -1,0 +1,38 @@
+<template name="loginModal">
+    <div class="modal hide fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Login</h3>
+      </div>
+      <div class="modal-body">
+      
+        <p>Complete this form to login.</p>
+
+        <form id="loginForm">
+            <table style="margin-left:20px;">
+                <col width="130">
+                <tr>
+                    <td>Username</td>
+                    <td><input type="text" id="loginUsername" placeholder="Username"></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" id="loginPassword" placeholder="Password"></td>
+                </tr>
+            </table>
+        </form>
+
+        {{> loginMessages}}        
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn btn-primary loginBtn">Sign In</button>
+      </div>
+    </div>      
+</template>
+
+<template name="loginMessages">
+    {{#if errorMessage}}
+        <div class="alert alert-error">{{errorMessage}}</div>
+    {{/if}}
+</template>

@@ -1,0 +1,12 @@
+<template name="home">
+  <h1>Home!</h1>
+  
+  {{#if currentUser}}
+    <P>(logged in as: <B>{{currentUser.username}}</B>)</P>
+    <ul>
+        <li><a href="/projects">projects</a></li>
+    </ul>
+  {{/if}}
+  
+</template>
+

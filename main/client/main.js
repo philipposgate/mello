@@ -1,101 +1,34 @@
-var appRouter;
-var home = "home";
-var homeLoggedIn = "projects";
-
-$(document).ready(function() {
-
-    // Backbone Router Definition: AppRouter
-    var AppRouter = Backbone.Router.extend({
-        routes: {
-            "p/:template": "mainContentRoute"    // eg: /p/myTemplate
-        },
-        
-        mainContentRoute: function(template) {
-        
-            if (template == home && Meteor.user())
-            {
-                template = homeLoggedIn;
-            }
-            
-            // Change "mainContent"
-            Session.set("mainContent", template);
-        },
-        
-        loadMainContent: function(template) {
-	        this.navigate("/p/" + template, {trigger: true});
-        }
-        
-    });
-
-    // Instantiate AppRouter
-    appRouter = new AppRouter;
-    
-    // Startup Backbone History Engine
-	Backbone.history.start({pushState: true});
+var Router = Backbone.Router.extend({
+	routes: {
+		"*action" : "defaultRoute"
+	},
 	
-	// Set Default Page
-    if (!Session.get("mainContent"))
-    {
-        appRouter.loadMainContent(home);
-    }
-    
-    // This chunk doesn't seem to work because loading the 
-    // 'mainContent' area seems to reload the whole page!
-    $(".navLink", ".nav").click(function(){
-        $(".navLink").removeClass("active");
-        $(this).addClass("active");
-    });
+	defaultRoute: function(action) {
+		if(!action || typeof Template[action] === "undefined") {
+			action = "home";
+		}
+		else if (Template[action].authRequired && !Meteor.user())
+		{
+		    action = "notLoggedIn";
+		}
+		$("#mainContent").html(Meteor.render(function(){return Template[action]()}));
+	}
 });
+
+var	router = new Router;
 
 Meteor.startup(function() {
-               
-    console.log("startup: " + new Date);
-    
-    // Set "mainContent"
-    // NOTE: this technique seems to reload the whole 
-    // page when the content changes here.  Need to 
-    // find a better way!
-	$("div#mainContent").html(getMainContent());
-
+	Backbone.history.start({pushState: true});
 });
-
-function getMainContent() {
-	return Meteor.render(function() {
-
-        var t = Session.get("mainContent");
-        var s = Meteor.status();
-
-		if (s.connected && s.status === "connected")
-		{
-		    if (Template[t])
-		    {
-		        if (Template[t].loginRequired && !Meteor.user())
-		        {
-				    t = "notLoggedIn";
-				}		       
-		    }
-		    else
-		    {
-				t = "pageNotFound";
-		    }
-		}
-		else
-		{
-		    t = "notConnected";
-		}
-
-   		return Template[t]();
-	});
-}
 
 function onLogin()
 {
-    appRouter.loadMainContent(homeLoggedIn);
+    router.navigate("/home", {trigger: true});
 }
 
 function onLogout()
 {
-    appRouter.loadMainContent(home);
+    router.navigate("/home", {trigger: true});
 }
 
 Template.notConnected.waiting = function() {
