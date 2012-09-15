@@ -1,4 +1,10 @@
-Template.loginModal.open = function() {
+Template.loginModal.created = function() {
+    $("#loginModal").on("shown", function () {
+      $("#loginUsername").focus();
+    });
+};
+
+Template.loginModal.show = function() {
     Session.set("loginModal_ERROR", null);
     $("#loginModal").modal("show");
 };

@@ -31,9 +31,9 @@
                       <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Not Logged In <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                          <li><a href="javascript:void(0)" onclick="Template.loginModal.open()">Login</a></li>
+                          <li><a href="javascript:void(0)" onclick="Template.loginModal.show()">Login</a></li>
                           <li class="divider"></li>
-                          <li><a href="javascript:void(0)" onclick="Template.createAcctModal.open()">Create New Account</a></li>
+                          <li><a href="javascript:void(0)" onclick="Template.createAcctModal.show()">Create New Account</a></li>
                           <li><a href="javascript:void(0)" class="forgotPwdBtn">Forgot Password</a></li>
                         </ul>
                       </li>
@@ -44,7 +44,4 @@
         </div>
       </div>
     </div>
-    
-    {{> loginModal}}
-    {{> createAcctModal}}
 </template>

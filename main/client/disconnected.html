@@ -1,0 +1,21 @@
+<template name="disconnectedModal">
+    <div class="modal hide fade" id="disconnectedModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+      <div class="modal-header">
+        <h3 id="myModalLabel">Disconnected</h3>
+      </div>
+      <div class="modal-body">
+      
+        <div class="alert alert-error bold">Lost connection with server.</div>
+
+        {{> disconnectedModalStatus}}
+        
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary retryBtn">Retry Connection</button>
+      </div>
+    </div>      
+</template>
+
+<template name="disconnectedModalStatus">
+    <P style="text-align:center;">Status: {{statusMsg}}...</p>
+</template>

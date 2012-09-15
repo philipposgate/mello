@@ -1,4 +1,4 @@
-Template.createAcctModal.open = function() {
+Template.createAcctModal.show = function() {
     $("#createAcctModal").modal("show");
 };
 

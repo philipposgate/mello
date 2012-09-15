@@ -19,6 +19,10 @@ var	router = new Router;
 
 Meteor.startup(function() {
 	Backbone.history.start({pushState: true});
+	
+    Handlebars.registerHelper('connected', function () {
+        return Meteor.status().status !== "waiting";
+    });
 });
 
 function onLogin()

@@ -4,8 +4,16 @@
 
 <body>
 
-    {{> navbar}}
+    {{> loginModal}}
+    {{> createAcctModal}}
+    {{> disconnectedModal}}
 
+    {{> navbar}}
+    {{> mainContent}}
+
+</body>
+
+<template name="mainContent">
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span12">
@@ -13,8 +21,7 @@
             </div>
         </div>
     </div>
-
-</body>
+</template>
 
 <template name="notLoggedIn">
   Not Logged In
