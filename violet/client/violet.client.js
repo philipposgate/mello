@@ -38,8 +38,6 @@ function getCollectionInfo(collection) {
 		if (typeof error === "undefined") {			
 			Template.documents.list = [];
 			_.each(result, function(value) {
-				value.address= {};
-				value.address.street = "123 Street";
 				Template.documents.list.push(value);
 			})
 			
