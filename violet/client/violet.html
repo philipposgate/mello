@@ -27,8 +27,8 @@
 
 <template name="documents">
 	{{#each list}}
-		<div class="document">
-			<pre>{{this}}</pre>
+		<div class="document well well-small">
+			{{prettyPrint this "null"}}
 		</div>
 	{{/each}} 
 </template>

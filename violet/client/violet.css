@@ -58,3 +58,11 @@ body {
 .document {
 	margin-bottom:30px;
 }
+
+.vio-obj, .vio-kv {
+	margin-left:20px;
+}
+
+.vio-obj:first-child {
+	margin:0;
+}
