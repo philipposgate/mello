@@ -4,8 +4,14 @@ var Router = Backbone.Router.extend({
 	},
 	
 	defaultRoute: function(action) {
-		if(!action || typeof Template[action] === "undefined") {
+	    
+		if(!action)
+		{
 			action = "home";
+		}
+		else if (typeof Template[action] === "undefined") 
+		{
+			action = "pageNotFound";
 		}
 		else if (Template[action].authRequired && !Meteor.user())
 		{
@@ -18,28 +24,30 @@ var Router = Backbone.Router.extend({
 var	router = new Router;
 
 Meteor.startup(function() {
+
+    // Fire up Backbone Router
 	Backbone.history.start({pushState: true});
 	
-    Handlebars.registerHelper('connected', function () {
-        return Meteor.status().status !== "waiting";
-    });
+	// A "reset form" jquery-function
+	// Usage: $("form", "#formContainer").reset();
+	$.fn.reset = function () {
+        $(this).each (function() { this.reset(); });
+    }
 });
 
+// Called on a login event
 function onLogin()
 {
     router.navigate("/home", {trigger: true});
 }
 
+// Called on a logout event
 function onLogout()
 {
     router.navigate("/home", {trigger: true});
 }
 
-Template.notConnected.waiting = function() {
-	return Meteor.status().status === "waiting";
-};
-
-<!-- helper func -->
+// A global helper function for getting element 'values' by their id (without using jquery)
 function elementValueById(id) {
     var element = document.getElementById(id);
     if (!element)

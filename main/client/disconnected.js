@@ -3,6 +3,7 @@ Template.disconnectedModal.rendered = function() {
 
     if (status.status === "waiting" && status.retry_count > 1 && $("#disconnectedModal").is(":hidden"))
     {
+        $(".modal").modal("hide");  
         $("#disconnectedModal").modal("show");  
     }
     else if (status.retry_count == 0 && $("#disconnectedModal").is(":visible"))

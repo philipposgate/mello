@@ -6,7 +6,10 @@
 
     {{> loginModal}}
     {{> createAcctModal}}
+    {{> forgotPasswordModal}}
     {{> disconnectedModal}}
+    {{> manageAcctModal}}
+    {{> changePasswordModal}}
 
     {{> navbar}}
     {{> mainContent}}
@@ -23,18 +26,8 @@
     </div>
 </template>
 
-<template name="notLoggedIn">
-  Not Logged In
-</template>
-
 <template name="pageNotFound">
   Page Not Found
-</template>
-
-<template name="notConnected">
-  {{#if waiting}}
-	  <div>Not Connected!</div>
-  {{/if}}
 </template>
 
 <template name="about">

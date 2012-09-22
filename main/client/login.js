@@ -1,12 +1,13 @@
-Template.loginModal.created = function() {
+Template.loginModal.show = function() {
+    Session.set("loginModal_ERROR", null);
+    $("form", "#loginModal").reset();
+    $("#loginModal").modal("show");
+};
+
+Template.loginModal.rendered = function() {
     $("#loginModal").on("shown", function () {
       $("#loginUsername").focus();
     });
-};
-
-Template.loginModal.show = function() {
-    Session.set("loginModal_ERROR", null);
-    $("#loginModal").modal("show");
 };
 
 Template.loginModal.events({
@@ -27,6 +28,11 @@ Template.loginModal.events({
              onLogin();
           }
         });
+    },
+    
+    "click .forgotPasswordBtn": function() {
+        $("#loginModal").modal("hide");
+        Template.forgotPasswordModal.show();
     }
     
 });

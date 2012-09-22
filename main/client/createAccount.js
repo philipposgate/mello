@@ -1,5 +1,12 @@
 Template.createAcctModal.show = function() {
+    $("form", "#createAcctModal").reset();
     $("#createAcctModal").modal("show");
+};
+
+Template.createAcctModal.rendered = function() {
+    $("#createAcctModal").on("shown", function () {
+      $("#createAcct-email").focus();
+    });
 };
 
 Template.createAcctModal.events({
@@ -8,18 +15,19 @@ Template.createAcctModal.events({
     },
     
     "click .createAcctBtn": function(){
-        var loginOpts = {
+        var acct = {
+            email: elementValueById('createAcct-email'),
             username: elementValueById('createAcct-username'),
             password: elementValueById('createAcct-password')
         };
 
-        if (loginOpts.password != elementValueById('createAcct-confirmPassword')) {
+        if (acct.password != elementValueById('createAcct-confirmPassword')) {
             Session.set("createAcctModal_ERROR", "Passwords don't match");
         }
         else
         {
             try {
-                Meteor.createUser(loginOpts, {}, function (error) {
+                Meteor.createUser(acct, {}, function (error) {
                     console.log(error);
                     if (error) {
                         Session.set("createAcctModal_ERROR", error.reason || "Unknown error");

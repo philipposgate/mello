@@ -26,6 +26,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn" data-dismiss="modal" aria-hidden="true">Cancel</button>
+        <button class="btn forgotPasswordBtn">Forgot Password</button>
         <button class="btn btn-primary loginBtn">Sign In</button>
       </div>
     </div>      
@@ -36,3 +37,11 @@
         <div class="alert alert-error">{{errorMessage}}</div>
     {{/if}}
 </template>
+
+<template name="notLoggedIn">
+  <center>
+    <P>Not Logged In</P>
+    <P><button class="btn btn-primary" onclick="Template.loginModal.show()">Click to Login</button></P>
+  </center>
+</template>
+
